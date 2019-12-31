@@ -194,8 +194,8 @@ def data_cleanse(auth_target=auth_target):
                 f = open(file_name, 'r')
 
                 lines = f.read()
-                f.close
-                
+                f.close()
+
                 lines = lines.replace(u'。', '。\n')
                 lines = lines.split('\n')
 
@@ -209,8 +209,11 @@ def data_cleanse(auth_target=auth_target):
                     line_mod = chuki.sub("", line_mod)
                     line_mod = zen_sp.sub("", line_mod)
                     line_mod = zen_sp2.sub("", line_mod)
-                    if (line_mod.isnumeric() or len(line_mod) <= 1 or line_mod[0] == "「" or
-                        line_mod[0] == "」" or line_mod[0] == "』" or line_mod[0] == "『" or len(line_mod) >= 75):
+                    if (line_mod.isnumeric() or len(line_mod) <= 1  or len(line_mod) >= 40):
+                        continue
+                    if line_mod[0] == "「" and line_mod[-1] == "」":
+                        line_mod = line_mod[1:-1]
+                    if line_mod[0] in ["【", "『",  "』", "「", "」", "《", "（", "｜", "："]:
                         continue
                     np_tmp = np.array([[w[0], file, line_mod]])
                     np_lines = np.vstack((np_lines, np_tmp))

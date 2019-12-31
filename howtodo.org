@@ -1,5 +1,8 @@
+
+#+begin_src shell
 python  aozora_scrape.py
 mkdir aozora_data_integ
 python aozora_cnn.py
 mkdir dataset
 python separate_sentences_for_training.py
+#+end_src
