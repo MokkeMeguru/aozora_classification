@@ -21,7 +21,7 @@ def statistics_df ():
     print ("[Stat] sentence length: mean {}".format (df ['length'].mean ()) )
     print ("[Stat] sentence legnth: std {}".format (df ['length'].std ()))
     return df
-    
+
 if __name__ == '__main__':
     df = statistics_df ()
     df [0].to_csv (save_file, index=False, encoding='utf-8', header=False)

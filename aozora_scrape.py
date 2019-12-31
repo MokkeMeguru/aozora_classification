@@ -213,7 +213,9 @@ def data_cleanse(auth_target=auth_target):
                         continue
                     if line_mod[0] == "「" and line_mod[-1] == "」":
                         line_mod = line_mod[1:-1]
-                    if line_mod[0] in ["【", "『",  "』", "「", "」", "《", "（", "｜", "："]:
+                    if line_mod[0] in ["【", "】", "『",  "』", "「", "」", "《", "》", "（", "）", "｜", "：", "」"]:
+                        continue
+                    if line_mod[-1] in ["【", "】", "『",  "』", "「", "」", "《", "》", "（", "）", "｜", "：", "」"]:
                         continue
                     np_tmp = np.array([[w[0], file, line_mod]])
                     np_lines = np.vstack((np_lines, np_tmp))
@@ -232,10 +234,10 @@ def data_cleanse(auth_target=auth_target):
 
 
 if __name__ == "__main__":
-    # make_workdir(aozora_dir, auth_target)
-    # download_zip(auth_target)
-    # zip_extract(auth_target)
-    # convert_sjis_to_utf8(auth_target)
+    make_workdir(aozora_dir, auth_target)
+    download_zip(auth_target)
+    zip_extract(auth_target)
+    convert_sjis_to_utf8(auth_target)
     data_cleanse(auth_target)
 
 
