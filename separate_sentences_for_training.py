@@ -7,6 +7,7 @@ output_dir = 'dataset/'
 # THE TARGET WRITER FOR STYLE TRANSFER
 target_writer = 'ogawa'
 target2_writer = 'akutagawa'
+sample_size = 15000
 ##############################################
 
 
@@ -34,12 +35,12 @@ def sample_target_data(path: Path, sample_size: int = 10000):
 
 def main():
     t1_sampled_df, t1_df = sample_target_data(
-        Path('aozora_data_integ/' + target_writer + '_integ.csv'))
+        Path('aozora_data_integ/' + target_writer + '_integ.csv'), sample_size)
     print("[info] sampled_dataset {}: other-dataset {}".format(
         len(t1_sampled_df), len(t1_df)))
 
     t2_sampled_df, t2_df = sample_target_data(
-        Path('aozora_data_integ/' + target2_writer + '_integ.csv'))
+        Path('aozora_data_integ/' + target2_writer + '_integ.csv'), sample_size)
     print("[info] sampled_dataset {}: other-dataset {}".format(
         len(t2_sampled_df), len(t2_df)))
 

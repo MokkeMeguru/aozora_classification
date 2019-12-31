@@ -4,8 +4,11 @@ from sklearn.model_selection import train_test_split
 import csv
 
 ### settings ####################################
-# input_dir = 'aozora_data_integ/'
 output_dir = 'dataset/'
+whole_file = Path(output_dir) / Path('flow_labeled.csv')
+train_file = Path(output_dir) / Path('flow_labeled_train.csv')
+val_file = Path(output_dir) / Path('flow_labeled_val.csv')
+test_file = Path(output_dir) / Path('flow_labeled_test.csv')
 # THE TARGET WRITER FOR STYLE TRANSFER
 target_writer = 'ogawa'
 target2_writer = 'akutagawa'
@@ -61,18 +64,28 @@ def main():
     train_ds = merge_df([train_tds, train_t2ds])
     val_ds = merge_df([val_tds, val_t2ds])
     test_ds = merge_df([test_tds, test_t2ds])
-    train_ds.to_csv(Path(output_dir) / Path('flow_labeled_train.csv'),
+    whole_ds = merge_df([tdf, t2df])
+    whole_ds.to_csv(whole_file,
                     index=False,
                     encoding='utf-8',
                     quoting=csv.QUOTE_NONNUMERIC)
-    val_ds.to_csv(Path(output_dir) / Path('flow_labeled_val.csv'),
+    train_ds.to_csv(train_file,
+                    index=False,
+                    encoding='utf-8',
+                    quoting=csv.QUOTE_NONNUMERIC)
+    val_ds.to_csv(val_file,
                   index=False,
                   encoding='utf-8',
                   quoting=csv.QUOTE_NONNUMERIC)
-    test_ds.to_csv(Path(output_dir) / Path('flow_labeled_test.csv'),
+    test_ds.to_csv(test_file,
                    index=False,
                    encoding='utf-8',
                    quoting=csv.QUOTE_NONNUMERIC)
+    print('[Info] file was saved at')
+    print('[Info] whole: {} ({} sentences)'.format(whole_file, len(whole_ds)))
+    print('[Info] train: {} ({} sentences)'.format(train_file, len(train_ds)))
+    print('[Info] val: {} ({} sentences)'.format(val_file, len(val_ds)))
+    print('[Info] test: {} ({} sentences)'.format(test_file, len(test_ds)))
 
 
 if __name__ == '__main__':
